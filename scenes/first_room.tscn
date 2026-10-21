@@ -1,0 +1,200 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/first_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="3_door"]
+[ext_resource type="Script" path="res://scripts/inspection_manager.gd" id="4_manager"]
+
+[sub_resource type="Environment" id="Environment_room"]
+background_mode = 1
+background_color = Color(0.008, 0.013, 0.014, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.24, 0.29, 0.285, 1)
+ambient_light_energy = 0.85
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 6.0
+glow_enabled = true
+glow_intensity = 0.5
+glow_strength = 1.0
+glow_bloom = 0.05
+glow_hdr_threshold = 1.05
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.032, 0.052, 0.048, 1)
+fog_light_energy = 1.0
+fog_depth_begin = 5.5
+fog_depth_end = 28.0
+fog_depth_curve = 1.55
+fog_sky_affect = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_light"]
+albedo_color = Color(0.72, 0.88, 0.82, 1)
+emission_enabled = true
+emission = Color(0.42, 0.8, 0.72, 1)
+roughness = 0.35
+
+[node name="FirstRoom" type="Node3D"]
+script = ExtResource("1_room")
+
+[node name="InspectionManager" type="Node" parent="."]
+script = ExtResource("4_manager")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_room")
+
+[node name="ReflectionProbeRoom" type="ReflectionProbe" parent="."]
+position = Vector3(0, 1.6, 0)
+update_mode = 0
+intensity = 0.45
+box_projection = true
+size = Vector3(12, 3.4, 8)
+
+[node name="ReflectionProbeCorridor" type="ReflectionProbe" parent="."]
+position = Vector3(0, 1.6, -15)
+update_mode = 0
+intensity = 0.4
+box_projection = true
+size = Vector3(6, 3.4, 22)
+
+[node name="ColdKeyLight" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-55, -28, 0)
+light_color = Color(0.68, 0.76, 0.8, 1)
+light_energy = 0.22
+shadow_enabled = true
+
+[node name="FluorescentLightA" type="OmniLight3D" parent="."]
+position = Vector3(-2.6, 2.85, -0.9)
+light_color = Color(0.74, 0.85, 0.85, 1)
+light_energy = 1.35
+omni_range = 6.5
+shadow_enabled = true
+
+[node name="FluorescentLightB" type="OmniLight3D" parent="."]
+position = Vector3(2.6, 2.85, -0.9)
+light_color = Color(0.74, 0.85, 0.85, 1)
+light_energy = 1.2
+omni_range = 6.0
+shadow_enabled = true
+
+[node name="EmergencyLight" type="OmniLight3D" parent="."]
+position = Vector3(5.2, 2.1, -1.8)
+light_color = Color(0.55, 0.08, 0.04, 1)
+light_energy = 0.3
+omni_range = 3.5
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector3(0, 0, 2.45)
+
+[node name="Door" parent="." instance=ExtResource("3_door")]
+position = Vector3(0, 0, -3.88)
+
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="HUDLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopShade" type="ColorRect" parent="HUDLayer/HUD"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 76.0
+color = Color(0.01, 0.02, 0.025, 0.72)
+mouse_filter = 2
+
+[node name="TimeLabel" type="Label" parent="HUDLayer/HUD"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 18.0
+offset_right = 260.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.68, 0.9, 0.86, 1)
+theme_override_font_sizes/font_size = 28
+text = "00:00"
+
+[node name="TitleLabel" type="Label" parent="HUDLayer/HUD"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 23.0
+offset_right = 700.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(0.55, 0.62, 0.61, 1)
+theme_override_font_sizes/font_size = 16
+text = "TURNO MORTO  /  SETOR 01"
+
+[node name="PhaseLabel" type="Label" parent="HUDLayer/HUD"]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 23.0
+offset_right = 1245.0
+offset_bottom = 54.0
+theme_override_colors/font_color = Color(0.55, 0.78, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+text = "PRONTO PARA INSPEÇÃO"
+horizontal_alignment = 2
+
+[node name="StatusLabel" type="Label" parent="HUDLayer/HUD"]
+visible = false
+layout_mode = 0
+offset_left = 34.0
+offset_top = 92.0
+offset_right = 1120.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0.72, 0.78, 0.75, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.75)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 17
+text = "Inspeção iniciada. Observe o ambiente."
+
+[node name="PhotoStatusLabel" type="Label" parent="HUDLayer/HUD"]
+visible = false
+layout_mode = 0
+offset_left = 34.0
+offset_top = 132.0
+offset_right = 1080.0
+offset_bottom = 164.0
+theme_override_colors/font_color = Color(0.55, 0.62, 0.6, 1)
+theme_override_font_sizes/font_size = 14
+text = "CÂMERA: Abra a porta para iniciar a inspeção."
+
+[node name="ReportLabel" type="Label" parent="HUDLayer/HUD"]
+visible = false
+layout_mode = 0
+offset_left = 34.0
+offset_top = 642.0
+offset_right = 1100.0
+offset_bottom = 670.0
+theme_override_colors/font_color = Color(0.55, 0.62, 0.6, 1)
+theme_override_font_sizes/font_size = 14
+text = "Volte à mesa de registro para concluir a inspeção."
+
+[node name="Crosshair" type="Label" parent="HUDLayer/HUD"]
+layout_mode = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 8.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0.62, 0.82, 0.78, 0.72)
+theme_override_font_sizes/font_size = 20
+text = "+"
+
+[node name="HintLabel" type="Label" parent="HUDLayer/HUD"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 676.0
+offset_right = 900.0
+offset_bottom = 708.0
+theme_override_colors/font_color = Color(0.45, 0.53, 0.51, 1)
+theme_override_font_sizes/font_size = 14
+text = "WASD mover  •  mouse olhar  •  E interagir  •  F fotografar  •  Esc liberar mouse"

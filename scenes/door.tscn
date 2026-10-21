@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/door.gd" id="1_door"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_door"]
+size = Vector3(2.2, 2.5, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_door"]
+size = Vector3(2.2, 2.5, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="DoorMaterial"]
+albedo_color = Color(0.38, 0.43, 0.42, 1)
+metallic = 0.72
+roughness = 0.32
+
+[sub_resource type="StandardMaterial3D" id="DoorFrameMaterial"]
+albedo_color = Color(0.12, 0.15, 0.15, 1)
+metallic = 0.68
+roughness = 0.38
+
+[sub_resource type="StandardMaterial3D" id="DoorGlassMaterial"]
+albedo_color = Color(0.04, 0.11, 0.12, 1)
+metallic = 0.35
+roughness = 0.16
+
+[sub_resource type="StandardMaterial3D" id="DoorHandleMaterial"]
+albedo_color = Color(0.55, 0.6, 0.57, 1)
+metallic = 0.94
+roughness = 0.18
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame_vertical"]
+size = Vector3(0.16, 2.8, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame_top"]
+size = Vector3(2.5, 0.16, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_window"]
+size = Vector3(0.82, 0.48, 0.025)
+
+[sub_resource type="BoxMesh" id="BoxMesh_window_bar"]
+size = Vector3(0.04, 0.5, 0.04)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_handle"]
+top_radius = 0.045
+bottom_radius = 0.045
+height = 0.52
+radial_segments = 16
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_door")
+
+[node name="Panel" type="StaticBody3D" parent="."]
+position = Vector3(0, 1.25, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Panel"]
+mesh = SubResource("BoxMesh_door")
+material_override = SubResource("DoorMaterial")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Panel"]
+shape = SubResource("BoxShape3D_door")
+
+[node name="Window" type="MeshInstance3D" parent="Panel"]
+position = Vector3(0, 0.46, -0.075)
+mesh = SubResource("BoxMesh_window")
+material_override = SubResource("DoorGlassMaterial")
+
+[node name="WindowBar" type="MeshInstance3D" parent="Panel"]
+position = Vector3(0, 0.46, -0.098)
+mesh = SubResource("BoxMesh_window_bar")
+material_override = SubResource("DoorFrameMaterial")
+
+[node name="Handle" type="MeshInstance3D" parent="Panel"]
+position = Vector3(0.72, -0.12, -0.12)
+rotation_degrees = Vector3(0, 0, 90)
+mesh = SubResource("CylinderMesh_handle")
+material_override = SubResource("DoorHandleMaterial")
+
+[node name="FrameLeft" type="MeshInstance3D" parent="."]
+position = Vector3(-1.18, 1.4, 0.08)
+mesh = SubResource("BoxMesh_frame_vertical")
+material_override = SubResource("DoorFrameMaterial")
+
+[node name="FrameRight" type="MeshInstance3D" parent="."]
+position = Vector3(1.18, 1.4, 0.08)
+mesh = SubResource("BoxMesh_frame_vertical")
+material_override = SubResource("DoorFrameMaterial")
+
+[node name="FrameTop" type="MeshInstance3D" parent="."]
+position = Vector3(0, 2.76, 0.08)
+mesh = SubResource("BoxMesh_frame_top")
+material_override = SubResource("DoorFrameMaterial")
+
+
