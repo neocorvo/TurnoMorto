@@ -71,10 +71,20 @@ godot --headless --path . res://tools/gameplay_probe.tscn
 
 Saída esperada: `inspection_manager_test: OK` e `gameplay_probe: OK`.
 
-## Créditos e licenças
+## Licença
+
+- O **código original do Turno Morto** (scripts, cenas, shaders, ferramentas e
+  documentos deste repositório) é distribuído sob a licença **MIT** — veja o
+  arquivo [`LICENSE`](LICENSE).
+- Os **recursos externos** em `assets/` (modelo e texturas do Poly Haven)
+  **não** são cobertos pela MIT: permanecem sob suas licenças originais
+  (**CC0**), conforme documentado em [`assets/LICENSE.md`](assets/LICENSE.md).
+- A engine [Godot Engine](https://godotengine.org) não é distribuída neste
+  repositório e possui sua própria licença MIT.
+
+## Créditos
 
 - Modelos e texturas de [Poly Haven](https://polyhaven.com) — licença **CC0**
   (detalhes e origem de cada arquivo em [`assets/LICENSE.md`](assets/LICENSE.md)).
 - Demais arte (geometria, materiais e texturas procedurais), código e design:
   feitos para este projeto.
-- O código do jogo não possui licença de redistribuição definida por enquanto.
