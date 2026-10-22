@@ -1,5 +1,13 @@
 # Retomada — Turno Morto
 
+## Publicação no GitHub — 2026-10-21
+
+- Repositório público: **https://github.com/neocorvo/TurnoMorto** (branch `main`).
+- Commit `3ffed50` com o protótipo completo (54 arquivos, sem `.godot/`).
+- `gh` CLI instalado sem sudo em `~/Downloads/gh-cli/bin/gh`, autenticado como `neocorvo`.
+- Commits usam identidade local do repo (`neocorvo@users.noreply.github.com`) para não expor e-mail pessoal.
+- Próximos pushes: `git push` normal após alterações.
+
 ## Reconstrução das mesas — 2026-10-21
 
 - Três áreas reconstruídas do zero: `_make_document_table` (aço inox, só protocolo impresso + caneta), `_make_autopsy_table` (bacia rebaixada com borda elevada contendo o lençol, dreno, estrutura em perfis) e `_make_instrument_cart` (mesa de Mayo com seringa, bisturi, pinça, tesoura e compressa em escala real).
